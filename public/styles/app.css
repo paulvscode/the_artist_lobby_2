@@ -129,6 +129,7 @@ a {
 }
 
 .administration-project-list:hover {
+    transition: .2s ease-in-out;
     background-color: #bdbdbd;
 }
 
@@ -162,4 +163,9 @@ a {
     border-radius: 5px;
     width: 40%;
     margin: .5rem auto 0 auto;
+}
+
+.administration-modal-close-button:hover {
+    transition: .2s ease-in-out;
+    background-color: #bdbdbd;
 }

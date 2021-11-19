@@ -38,13 +38,16 @@
     </div>
 
     <script>
-        $('.administration-project-list').on("click", function (e) {
+        $('.administration-project-list').on("click", function () {
             const currentId = $(this).find(".administration-current-project-id").text();
             const currentTitle = $(this).find(".administration-current-project-title").text();
             const currentCategory = $(this).find(".administration-current-project-category").text();
             $('.administration-modal-project-current-id').val(currentId);
             $('.administration-modal-project-current-title').val(currentTitle);
             $('.administration-modal-project-current-category').val(currentCategory);
+        });
+
+        $('.administration-modal-close-button').on("click", function () {
         });
     </script>
 {% endblock %}
