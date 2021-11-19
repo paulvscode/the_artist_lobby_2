@@ -52,6 +52,10 @@ html {
     color: white;
 }
 
+.fa-angle-right {
+    margin-right: .2rem;
+}
+
 /*footer*/
 
 .footer {
@@ -76,5 +80,14 @@ html {
     justify-content: center;
 }
 .container-project {
+    width: 70%;
+    margin: 1rem;
+}
 
+.project-title {
+    padding-bottom: .5rem;
+}
+
+.fa-book-open {
+    padding: .5rem;
 }
