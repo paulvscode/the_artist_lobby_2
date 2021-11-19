@@ -3,7 +3,7 @@
 <head>
     {% block head %}
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Artist Lobby{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
             <link rel="stylesheet" href="{{ asset('styles/fontawesome-free-5.15.4-web/css/all.css') }}">
@@ -28,7 +28,7 @@
                                 class="fas fa-angle-right"></i></a></li>
             {% endif %}
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <li class="navbar-element"><a class="navbar-a-element" href="{{ path('app_logout') }}">Log out<i
+                <li class="navbar-element"><a class="navbar-a-element" href="{{ path('app_logout') }}">Log out ( {{ app.user.email }} )<i
                                 class="fas fa-angle-right"></i></a></li>
             {% else %}
                 <li class="navbar-element"><a class="navbar-a-element" href="{{ path('login') }}">Log in<i
@@ -42,7 +42,7 @@
 
 {% block footer %}
     <div class="footer">
-        <p>Copyright etc etc</p>
+        <p>Copyright M<i class="fab fa-etsy"></i> - {{ "now"|date("Y") }}</p>
     </div>
 {% endblock %}
 

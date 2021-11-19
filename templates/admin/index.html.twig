@@ -1,5 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Administration zone</h2>
+    <div class="container-administration">
+        <h2>Administration zone</h2>
+        <div class="administration-projects">
+            <h3>Manage projects</h3>
+            <div class="administration-project-list-container">
+                {% for project in projects %}
+                    <ul class="administration-project-list">
+                        <li class="administration-project-entity"><span class="administration-format-project-entity">id</span>{{ project.id }}</li>
+                        <li class="administration-project-entity"><span class="administration-format-project-entity">title</span>{{ project.title }}</li>
+                        <li class="administration-project-entity"><span class="administration-format-project-entity">category</span>{{ project.category }}</li>
+                    </ul>
+                {% endfor %}
+            </div>
+
+
+        </div>
+
+
+    </div>
+
 {% endblock %}

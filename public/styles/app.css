@@ -22,7 +22,7 @@ html {
 .navbar-container {
     background-color: rgb(255, 222, 89);
     height: 60px;
-    width: 100%;
+    width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,7 +36,7 @@ html {
 .navbar-element {
     list-style: none;
     text-transform: uppercase;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
     margin: 0 1px;
@@ -90,4 +90,49 @@ html {
 
 .fa-book-open {
     padding: .5rem;
+}
+
+/*admin*/
+
+.container-administration {
+    width: 80%;
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.administration-projects {
+    text-align: center;
+    width: 50%;
+    padding: 1rem;
+}
+
+.administration-project-list-container {
+    text-align: center;
+    overflow: auto;
+    height: 60vh;
+}
+
+.administration-project-list {
+    display: flex;
+   align-items: flex-start;
+    flex-direction: column;
+    background-color: #e3e3e3;
+    width: 90%;
+    list-style: none;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.administration-project-entity {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: .3rem;
+}
+
+.administration-format-project-entity {
+    text-transform: uppercase;
+    border-radius: 10px;
+    margin-right: auto;
 }
