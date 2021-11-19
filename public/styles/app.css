@@ -70,11 +70,11 @@ html {
 /*project*/
 
 .container-projects {
+    width: 70%;
+    margin: 1rem auto;
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #eaeaea;
-    width: 30%;
-    margin: 0 auto;
+}
+.container-project {
+
 }

@@ -13,8 +13,19 @@ class ProjectController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(): Response
     {
+        $projects = $this->getDoctrine()
+            ->getRepository(Project::class)
+            ->findAll();
+
+        if (!$projects) {
+            throw $this->createNotFoundException(
+                'No projects found'
+            );
+        }
+
         return $this->render('project/index.html.twig', [
             'controller_name' => 'ProjectController',
+            'projects' => $projects
         ]);
     }
 
