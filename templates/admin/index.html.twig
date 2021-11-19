@@ -7,18 +7,44 @@
             <h3>Manage projects</h3>
             <div class="administration-project-list-container">
                 {% for project in projects %}
-                    <ul class="administration-project-list">
-                        <li class="administration-project-entity"><span class="administration-format-project-entity">id</span>{{ project.id }}</li>
-                        <li class="administration-project-entity"><span class="administration-format-project-entity">title</span>{{ project.title }}</li>
-                        <li class="administration-project-entity"><span class="administration-format-project-entity">category</span>{{ project.category }}</li>
-                    </ul>
+                    <a href="#modal-project" rel="modal:open">
+                        <ul class="administration-project-list">
+                            <li datatype="data-id" class="administration-project-entity"><span
+                                        class="administration-format-project-entity">id</span><span
+                                        class="administration-current-project-id">{{ project.id }}</span></li>
+                            <li class="administration-project-entity"><span
+                                        class="administration-format-project-entity">title</span><span
+                                        class="administration-current-project-title">{{ project.title }}</span></li>
+                            </li>
+                            <li class="administration-project-entity"><span
+                                        class="administration-format-project-entity">category</span><span
+                                        class="administration-current-project-category">{{ project.category }}</span>
+                            </li>
+                        </ul>
+                    </a>
                 {% endfor %}
             </div>
-
-
         </div>
 
+        <div id="modal-project" class="modal">
+            <div class="administration-modal-project-content">
+                <input class="administration-modal-project-current-id">
+                <input class="administration-modal-project-current-title">
+                <input class="administration-modal-project-current-category">
+                <a href="#" rel="modal:close" class="administration-modal-close-button">Sauvegarder et fermer</a>
+            </div>
 
+        </div>
     </div>
 
+    <script>
+        $('.administration-project-list').on("click", function (e) {
+            const currentId = $(this).find(".administration-current-project-id").text();
+            const currentTitle = $(this).find(".administration-current-project-title").text();
+            const currentCategory = $(this).find(".administration-current-project-category").text();
+            $('.administration-modal-project-current-id').val(currentId);
+            $('.administration-modal-project-current-title').val(currentTitle);
+            $('.administration-modal-project-current-category').val(currentCategory);
+        });
+    </script>
 {% endblock %}
