@@ -152,6 +152,10 @@ a {
     flex-direction: column;
 }
 
+.administration-current-project-category {
+    text-transform: capitalize;
+}
+
 .administration-modal-project-content input {
     margin: .3rem;
 }
@@ -168,4 +172,13 @@ a {
 .administration-modal-close-button:hover {
     transition: .2s ease-in-out;
     background-color: #bdbdbd;
+}
+
+/*default hiding*/
+
+#ajax-success-div {
+    display: none;
+    color: #28A74B;
+    font-size: 1.2rem;
+    text-align: center;
 }

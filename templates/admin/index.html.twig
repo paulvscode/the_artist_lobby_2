@@ -8,10 +8,11 @@
             <div class="administration-project-list-container">
                 {% for project in projects %}
                     <a href="#modal-project" rel="modal:open">
-                        <ul class="administration-project-list">
-                            <li datatype="data-id" class="administration-project-entity"><span
-                                        class="administration-format-project-entity">id</span><span
-                                        class="administration-current-project-id">{{ project.id }}</span></li>
+                        <ul class="administration-project-list project-{{ project.id }}">
+                            <li datatype="data-id" class="administration-project-entity">
+                                <span class="administration-format-project-entity">id</span>
+                                <span class="administration-current-project-id">{{ project.id }}</span>
+                            </li>
                             <li class="administration-project-entity"><span
                                         class="administration-format-project-entity">title</span><span
                                         class="administration-current-project-title">{{ project.title }}</span></li>
@@ -28,12 +29,16 @@
 
         <div id="modal-project" class="modal">
             <div class="administration-modal-project-content">
-                <input class="administration-modal-project-current-id">
-                <input class="administration-modal-project-current-title">
-                <input class="administration-modal-project-current-category">
-                <a href="#" rel="modal:close" class="administration-modal-close-button">Sauvegarder et fermer</a>
+                <div id="ajax-success-div" role="alert">
+                    Modifié avec succès
+                </div>
+                <form>
+                    <input name="id" type="hidden" class="administration-modal-project-current-id">
+                    <input name="title" class="administration-modal-project-current-title">
+                    <input name="category" class="administration-modal-project-current-category">
+                    <input type="submit" value="Save">
+                </form>
             </div>
-
         </div>
     </div>
 
@@ -47,7 +52,51 @@
             $('.administration-modal-project-current-category').val(currentCategory);
         });
 
-        $('.administration-modal-close-button').on("click", function () {
+        $.modal.defaults = {
+            closeExisting: true,
+            escapeClose: false,
+            clickClose: false,
+            closeText: 'Close',
+            closeClass: '',
+            modalClass: "modal",
+            blockerClass: "jquery-modal",
+            spinnerHtml: '<div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div>',
+            showSpinner: true,
+            showClose: true,
+            fadeDuration: null,   // Number of milliseconds the fade animation takes.
+            fadeDelay: 1.0        // Point during the overlay's fade-in that the modal begins to fade in (.5 = 50%, 1.5 = 150%, etc.)
+        };
+
+        // $('#modal-project .administration-modal-close-button').on("click", function () {
+        //     const changedTitle = $("#modal-project .administration-modal-project-current-title").val();
+        //     console.log(changedTitle);
+        // });
+
+        $(function () {
+            const urlBase = "/admin/update";
+            $('#modal-project form').submit(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: urlBase,
+                    data: $(this).serializeArray(),
+                    success: function (data) {
+                        let projectTile = '.administration-project-list-container .project-'+ data.id;
+                        $(projectTile +' .administration-current-project-title').text(data.title);
+                        $(projectTile+ ' .administration-current-project-category').text(data.category);
+
+                        $('#modal-project form').hide();
+                        $('#ajax-success-div').css("display", "inline-block");
+                        $('.close-modal').on("click", function() {
+                            $('#modal-project form').show();
+                            $('#ajax-success-div').css("display", "none");
+                        })
+                    },
+                    error: function (response) {
+                        console.log(response.responseText)
+                    }
+                });
+            });
         });
     </script>
 {% endblock %}
