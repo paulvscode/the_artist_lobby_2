@@ -32,12 +32,14 @@ a {
     justify-content: center;
     align-items: center;
 }
+
 .navbar-elements {
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
+
 .navbar-element {
     list-style: none;
     text-transform: uppercase;
@@ -84,6 +86,7 @@ a {
     display: flex;
     justify-content: center;
 }
+
 .container-project {
     width: 70%;
     margin: 1rem;
@@ -107,53 +110,16 @@ a {
 
 .administration-projects {
     text-align: center;
-    width: 50%;
+    width: 100%;
     padding: 1rem;
+    margin: 0 auto;
 }
 
 .administration-project-list-container {
     text-align: center;
     overflow: auto;
     height: 60vh;
-}
-
-.administration-project-list {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    background-color: #e3e3e3;
-    width: 90%;
-    list-style: none;
-    margin: 1rem auto;
-    border-radius: 5px;
-}
-
-.administration-project-list:hover {
-    transition: .2s ease-in-out;
-    background-color: #bdbdbd;
-}
-
-.administration-project-entity {
-    display: flex;
-    width: 100%;
-    position: relative;
-    padding: .5rem;
-    cursor: pointer;
-}
-
-.administration-format-project-entity {
-    text-transform: uppercase;
-    border-radius: 10px;
-    margin-right: auto;
-}
-
-.administration-modal-project-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.administration-current-project-category {
-    text-transform: capitalize;
+    width: auto;
 }
 
 .administration-modal-project-content input {
@@ -188,7 +154,7 @@ a {
     flex-direction: column;
 }
 
-.administration-add-project-text-input{
+.administration-add-project-text-input {
     margin: .2rem;
 }
 
@@ -198,6 +164,61 @@ a {
 
 .administration-add-project-form-select {
     text-align: center;
+}
+
+.fa-pen {
+    cursor: pointer;
+    margin: .2rem;
+}
+
+.fa-times-circle {
+    cursor: pointer;
+    margin: .2rem;
+}
+
+.fa-pen:hover {
+    cursor: pointer;
+    margin: .2rem;
+    color: #5eb5e0;
+}
+
+.fa-times-circle:hover {
+    cursor: pointer;
+    margin: .2rem;
+    color: #B0413E;
+}
+
+.administration-project-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    height: 42%;
+    width: auto;
+}
+
+.administration-button-container-project {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.administration-button-edit {
+    margin: .2rem;
+    background-color: white;
+    border: none;
+}
+
+.administration-button-delete {
+    margin: .2rem;
+    background-color: white;
+    border: none;
+}
+
+.card-text {
+    height: 200px;
+    overflow: auto;
 }
 
 /*default hiding*/

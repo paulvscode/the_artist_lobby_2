@@ -8,147 +8,87 @@
                             class="fas fa-plus"></i></a></h3>
             <div class="administration-project-list-container">
                 {% for project in projects %}
-                    <a href="#modal-project" rel="modal:open">
-                        <ul class="administration-project-list project-{{ project.id }}">
-                            <li datatype="data-id" class="administration-project-entity">
-                                <span class="administration-format-project-entity">id</span>
-                                <span class="administration-current-project-id">{{ project.id }}</span>
-                            </li>
-                            <li class="administration-project-entity"><span
-                                        class="administration-format-project-entity">title</span><span
-                                        class="administration-current-project-title">{{ project.title }}</span></li>
-                            </li>
-                            <li class="administration-project-entity"><span
-                                        class="administration-format-project-entity">category</span><span
-                                        class="administration-current-project-category">{{ project.category }}</span>
-                            </li>
-                        </ul>
-                    </a>
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ asset('assets/bgsmall.jpg') }}" class="card-img-top"
+                             alt="image {{ project.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ project.title }}</h5>
+                            <p class="card-text">{{ project.content }}</p>
+                            <a href="#" class="btn btn-primary">Go to project</a>
+                            <div class="administration-button-container-project">
+
+                                <div class="administration-button-edit"><a href="#modal-project" rel="modal:open"><i
+                                                class="fas fa-pen"></i> </a></div>
+                                <div class="administration-button-delete"><i class="far fa-times-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
         </div>
-
-        <div id="modal-project" class="modal">
-            <p class="administration-title-modals" style="text-align: center">Modifier un projet</p>
-            <div class="administration-modal-project-content">
-                <div id="ajax-success-div" role="alert">
-                    Modifié avec succès
-                </div>
-                <form>
-                    <input name="id" type="hidden" class="administration-modal-project-current-id">
-                    <input name="title" class="administration-modal-project-current-title">
-                    <input name="category" class="administration-modal-project-current-category">
-                    <input type="submit" value="Save">
-                </form>
-            </div>
-        </div>
-
-        <div id="modal-add-project" class="modal">
-            <p class="administration-title-modals" style="text-align: center">Ajouter un projet</p>
-            <div id="ajax-success-div-add" role="alert">
-                Ajouté avec succès
-            </div>
-            <form action="submit" class="administration-form-add-project">
-                <input name="titleaddproject" class="administration-add-project-text-input" type="text"
-                       placeholder="Titre">
-                <input name="contentaddproject" class="administration-add-project-content-input" type="textarea"
-                       placeholder="Description">
-                <div class="administration-add-project-form-select">
-                    <select name="categoryproject">
-                        <option value="0">Catégorie :</option>
-                        <option value="1">Business</option>
-                        <option value="2">Marketing</option>
-                        <option value="3">Communication</option>
-                    </select>
-                </div>
-                <input type="submit" value="Save">
-            </form>
-        </div>
-
     </div>
 
-
-
     <script>
-        $('.administration-project-list').on("click", function () {
-            const currentId = $(this).find(".administration-current-project-id").text();
-            const currentTitle = $(this).find(".administration-current-project-title").text();
-            const currentCategory = $(this).find(".administration-current-project-category").text();
-            $('.administration-modal-project-current-id').val(currentId);
-            $('.administration-modal-project-current-title').val(currentTitle);
-            $('.administration-modal-project-current-category').val(currentCategory);
-        });
-
-        $.modal.defaults = {
-            closeExisting: true,
-            escapeClose: false,
-            clickClose: false,
-            closeText: 'Close',
-            closeClass: '',
-            modalClass: "modal",
-            blockerClass: "jquery-modal",
-            spinnerHtml: '<div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div>',
-            showSpinner: true,
-            showClose: true,
-            fadeDuration: null,   // Number of milliseconds the fade animation takes.
-            fadeDelay: 1.0        // Point during the overlay's fade-in that the modal begins to fade in (.5 = 50%, 1.5 = 150%, etc.)
-        };
-
-        // $('#modal-project .administration-modal-close-button').on("click", function () {
-        //     const changedTitle = $("#modal-project .administration-modal-project-current-title").val();
-        //     console.log(changedTitle);
+        // $('.administration-button-edit').on("click", function () {
+        // const currentId = $(this).find(".administration-current-project-id").text();
+        // const currentTitle = $(this).find(".administration-current-project-title").text();
+        // const currentCategory = $(this).find(".administration-current-project-category").text();
+        // $('.administration-modal-project-current-id').val(currentId);
+        // $('.administration-modal-project-current-title').val(currentTitle);
+        // $('.administration-modal-project-current-category').val(currentCategory);
         // });
-
-        $(function () {
-            const urlBase = "/admin/update";
-            $('#modal-project form').submit(function (event) {
-                event.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: urlBase,
-                    data: $(this).serializeArray(),
-                    success: function (data) {
-                        let projectTile = '.administration-project-list-container .project-' + data.id;
-                        $(projectTile + ' .administration-current-project-title').text(data.title);
-                        $(projectTile + ' .administration-current-project-category').text(data.category);
-
-                        $('#modal-project form').hide();
-                        $('.administration-title-modals').hide();
-                        $('#ajax-success-div').css("display", "inline-block");
-                        $('.close-modal').on("click", function () {
-                            $('#modal-project form').show();
-                            $('#ajax-success-div').css("display", "none");
-                        })
-                    },
-                    error: function (response) {
-                        console.log(response.responseText)
-                    }
-                });
-            });
-        });
-
-        $(function () {
-            const urlBase = "/admin/create";
-            $('#modal-add-project form').submit(function (event) {
-                event.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: urlBase,
-                    data: $(this).serializeArray(),
-                    success: function (data) {
-                        $('#modal-add-project form').hide();
-                        $('.administration-title-modals').hide();
-                        $('#ajax-success-div-add').css("display", "inline-block");
-                        $('.close-modal').on("click", function () {
-                            $('#modal-add-project form').show();
-                            $('#ajax-success-div').css("display", "none");
-                        })
-                    },
-                    error: function (response) {
-                        console.log(response.responseText)
-                    }
-                });
-            });
-        });
+        //
+        // $(function () {
+        // const urlBase = "/admin/update";
+        // $('#modal-project form').submit(function (event) {
+        // event.preventDefault();
+        // $.ajax({
+        // type: "POST",
+        // url: urlBase,
+        // data: $(this).serializeArray(),
+        // success: function (data) {
+        // let projectTile = '.administration-project-list-container .project-' + data.id;
+        // $(projectTile + ' .administration-current-project-title').text(data.title);
+        // $(projectTile + ' .administration-current-project-category').text(data.category);
+        //
+        // $('#modal-project form').hide();
+        // $('.administration-title-modals').hide();
+        // $('#ajax-success-div').css("display", "inline-block");
+        // $('.close-modal').on("click", function () {
+        // $('#modal-project form').show();
+        // $('#ajax-success-div').css("display", "none");
+        // })
+        // },
+        // error: function (response) {
+        // console.log(response.responseText)
+        // }
+        // });
+        // });
+        // });
+        //
+        // $(function () {
+        // const urlBase = "/admin/create";
+        // $('#modal-add-project form').submit(function (event) {
+        // event.preventDefault();
+        // $.ajax({
+        // type: "POST",
+        // url: urlBase,
+        // data: $(this).serializeArray(),
+        // success: function (data) {
+        // $('#modal-add-project form').hide();
+        // $('.administration-title-modals').hide();
+        // $('#ajax-success-div-add').css("display", "inline-block");
+        // $('.close-modal').on("click", function () {
+        // $('#modal-add-project form').show();
+        // $('#ajax-success-div').css("display", "none");
+        // })
+        // },
+        // error: function (response) {
+        // console.log(response.responseText)
+        // }
+        // });
+        // });
+        // });
     </script>
 {% endblock %}
