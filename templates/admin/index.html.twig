@@ -4,7 +4,8 @@
     <div class="container-administration">
         <h2>Administration zone</h2>
         <div class="administration-projects">
-            <h3>Manage projects  ({{ projects|length }})<a href="#modal-add-project" rel="modal:open"><i class="fas fa-plus"></i></a></h3>
+            <h3>Manage projects ({{ projects|length }})<a href="#modal-add-project" rel="modal:open"><i
+                            class="fas fa-plus"></i></a></h3>
             <div class="administration-project-list-container">
                 {% for project in projects %}
                     <a href="#modal-project" rel="modal:open">
@@ -28,6 +29,7 @@
         </div>
 
         <div id="modal-project" class="modal">
+            <p class="administration-title-modals" style="text-align: center">Modifier un projet</p>
             <div class="administration-modal-project-content">
                 <div id="ajax-success-div" role="alert">
                     Modifié avec succès
@@ -42,8 +44,25 @@
         </div>
 
         <div id="modal-add-project" class="modal">
-            <p>Ajouter un projet</p>
-            <a href="#" rel="modal:close">Sauvegarder et fermer</a>
+            <p class="administration-title-modals" style="text-align: center">Ajouter un projet</p>
+            <div id="ajax-success-div-add" role="alert">
+                Ajouté avec succès
+            </div>
+            <form action="submit" class="administration-form-add-project">
+                <input name="titleaddproject" class="administration-add-project-text-input" type="text"
+                       placeholder="Titre">
+                <input name="contentaddproject" class="administration-add-project-content-input" type="textarea"
+                       placeholder="Description">
+                <div class="administration-add-project-form-select">
+                    <select name="categoryproject">
+                        <option value="0">Catégorie :</option>
+                        <option value="1">Business</option>
+                        <option value="2">Marketing</option>
+                        <option value="3">Communication</option>
+                    </select>
+                </div>
+                <input type="submit" value="Save">
+            </form>
         </div>
 
     </div>
@@ -89,14 +108,39 @@
                     url: urlBase,
                     data: $(this).serializeArray(),
                     success: function (data) {
-                        let projectTile = '.administration-project-list-container .project-'+ data.id;
-                        $(projectTile +' .administration-current-project-title').text(data.title);
-                        $(projectTile+ ' .administration-current-project-category').text(data.category);
+                        let projectTile = '.administration-project-list-container .project-' + data.id;
+                        $(projectTile + ' .administration-current-project-title').text(data.title);
+                        $(projectTile + ' .administration-current-project-category').text(data.category);
 
                         $('#modal-project form').hide();
+                        $('.administration-title-modals').hide();
                         $('#ajax-success-div').css("display", "inline-block");
-                        $('.close-modal').on("click", function() {
+                        $('.close-modal').on("click", function () {
                             $('#modal-project form').show();
+                            $('#ajax-success-div').css("display", "none");
+                        })
+                    },
+                    error: function (response) {
+                        console.log(response.responseText)
+                    }
+                });
+            });
+        });
+
+        $(function () {
+            const urlBase = "/admin/create";
+            $('#modal-add-project form').submit(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: urlBase,
+                    data: $(this).serializeArray(),
+                    success: function (data) {
+                        $('#modal-add-project form').hide();
+                        $('.administration-title-modals').hide();
+                        $('#ajax-success-div-add').css("display", "inline-block");
+                        $('.close-modal').on("click", function () {
+                            $('#modal-add-project form').show();
                             $('#ajax-success-div').css("display", "none");
                         })
                     },

@@ -71,4 +71,45 @@ class AdminController extends AbstractController
             'category' => $formCategory
         ]);
     }
+
+    #[Route('/create', name: 'create', methods: ['POST'])]
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $categories = [
+            null,'business','marketing','communication'
+        ];
+
+        $formTitle = htmlentities($request->request->get('titleaddproject'));
+        $formContent = htmlentities($request->request->get('contentaddproject'));
+        $formCategory = htmlentities($request->request->get('categoryproject'));
+
+        $selectedCategory = $categories[$formCategory];
+
+        if ($selectedCategory == null){
+            $selectedCategory = 'sans catégorie';
+        }
+
+        if (empty($formTitle)) {
+            return new JsonResponse('Le titre du projet doit être mentionné', 404);
+        }
+
+        if (empty($formContent)) {
+            return new JsonResponse('La description du projet doit être mentionnée', 404);
+        }
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $project = new Project();
+        $project->setTitle($formTitle);
+        $project->setContent($formContent);
+        $project->setCategory($selectedCategory);
+
+        $entityManager->persist($project);
+        $entityManager->flush();
+
+        return new JsonResponse([
+            'title' => $formTitle,
+            'content' => $formContent,
+            'category' => $selectedCategory,
+        ]);
+    }
 }

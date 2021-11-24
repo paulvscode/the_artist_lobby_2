@@ -35,7 +35,7 @@ class ProjectController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         $project = new Project();
-        $project->setTitle('Levis');
+        $project->setTitle('Carrefour');
         $project->setContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida at purus eget tincidunt. Suspendisse gravida euismod nisl, non feugiat eros pretium aliquet. Donec in tortor neque. Sed sit amet dapibus libero. Maecenas sed metus eu diam tincidunt egestas. Etiam nunc justo, interdum vel lacus nec, consequat vestibulum nisi. Curabitur id nibh a metus cursus vehicula sed non nunc.');
         $project->setCategory('communication');
 

@@ -183,9 +183,33 @@ a {
     color: #28A74B;
 }
 
+.administration-form-add-project {
+    display: flex;
+    flex-direction: column;
+}
+
+.administration-add-project-text-input{
+    margin: .2rem;
+}
+
+.administration-add-project-content-input {
+    margin: .2rem;
+}
+
+.administration-add-project-form-select {
+    text-align: center;
+}
+
 /*default hiding*/
 
 #ajax-success-div {
+    display: none;
+    color: #28A74B;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+#ajax-success-div-add {
     display: none;
     color: #28A74B;
     font-size: 1.2rem;
