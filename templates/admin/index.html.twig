@@ -4,7 +4,7 @@
     <div class="container-administration">
         <h2>Administration zone</h2>
         <div class="administration-projects">
-            <h3>Manage projects</h3>
+            <h3>Manage projects  ({{ projects|length }})<a href="#modal-add-project" rel="modal:open"><i class="fas fa-plus"></i></a></h3>
             <div class="administration-project-list-container">
                 {% for project in projects %}
                     <a href="#modal-project" rel="modal:open">
@@ -40,7 +40,15 @@
                 </form>
             </div>
         </div>
+
+        <div id="modal-add-project" class="modal">
+            <p>Ajouter un projet</p>
+            <a href="#" rel="modal:close">Sauvegarder et fermer</a>
+        </div>
+
     </div>
+
+
 
     <script>
         $('.administration-project-list').on("click", function () {
