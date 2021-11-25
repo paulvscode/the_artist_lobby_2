@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,6 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/project', name: 'project_')]
 class ProjectController extends AbstractController
 {
+    public function __construct(
+        private ProjectRepository $projectRepository
+    )
+    {
+    }
+
     #[Route('/', name: 'index')]
     public function index(): Response
     {
@@ -30,7 +37,7 @@ class ProjectController extends AbstractController
     }
 
     #[Route('/create', name: 'create')]
-    public function createProject() : Response
+    public function createProject(): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -44,6 +51,14 @@ class ProjectController extends AbstractController
 
         $entityManager->flush();
 
-        return new Response('Project saved with id '.$project->getId());
+        return new Response('Project saved with id ' . $project->getId());
+    }
+
+    #[Route('/{id}', name: 'list')]
+    public function list(Project $project): Response
+    {
+        return $this->render('project/list.html.twig', [
+            'project' => $project
+        ]);
     }
 }

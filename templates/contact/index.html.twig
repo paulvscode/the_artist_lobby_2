@@ -1,5 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>There will be a contact form here</h2>
+    <div class="container-contact-form">
+        <form action="{{ path('contact_submit') }}" method="post">
+            <div class="form-group">
+                <label for="input-email">Votre adresse email</label>
+                <input name="email-contact-form" type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Votre email ici">
+                <small id="emailHelp" class="form-text text-muted">Nous ne partageons vos emails avec personne.</small>
+            </div>
+            <div class="form-group">
+                <label for="input-content">Votre message</label>
+                <textarea name="content-contact-form" class="form-control" id="input-content" rows="3" placeholder="Votre message là"></textarea>
+            </div>
+            <div class="form-check">
+                <input required type="checkbox" class="form-check-input" id="contact-form-check">
+                <label class="form-check-label" for="contact-form-check">Cochez-moi</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 {% endblock %}
