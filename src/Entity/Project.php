@@ -32,6 +32,11 @@ class Project
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $imageSrc;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Project
     public function setCategory(string $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getImageSrc()
+    {
+        return $this->imageSrc;
+    }
+
+    public function setImageSrc($imageSrc): Project
+    {
+        $this->imageSrc = $imageSrc;
 
         return $this;
     }
