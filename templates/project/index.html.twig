@@ -6,11 +6,14 @@
     <div class="container-projects">
         {% for project in projects %}
             <div class="card" style="width: 18rem; margin: 1rem;">
-                <img class="card-img-top" style="padding: .5rem;" src="https://picsum.photos/200/150" alt="Card image cap">
+                <img class="card-img-top" style="padding: .5rem;object-fit: cover; width: 200px; height: 150px"
+                     src="{{ asset(project.imageSrc)}}"
+                     alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ project.title }}</h5>
                     <p class="card-text">{{ project.content }}</p>
-                    <a href="{{ path('project_list', {id: project.id}) }}" style="background-color: #FFDE59;" class="btn">Go somewhere</a>
+                    <a href="{{ path('project_list', {id: project.id}) }}" style="background-color: #FFDE59;"
+                       class="btn">Go somewhere</a>
                 </div>
             </div>
         {% endfor %}

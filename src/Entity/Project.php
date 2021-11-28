@@ -85,7 +85,7 @@ class Project
 
     public function setImageSrc($imageSrc): Project
     {
-        $this->imageSrc = $imageSrc;
+        $this->imageSrc = 'assets/'.$imageSrc;
 
         return $this;
     }
