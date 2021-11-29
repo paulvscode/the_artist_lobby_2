@@ -100,6 +100,8 @@ a {
     margin: 1rem auto;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
 }
 
 .container-project {
@@ -113,6 +115,22 @@ a {
 
 .fa-book-open {
     padding: .5rem;
+}
+
+.go-back-project-full {
+    background-color: rgb(255, 222, 89);
+    border: none;
+    border-radius: 10px;
+    height: auto;
+    width: 50%;
+    margin: .5rem auto;
+    cursor: pointer;
+    text-align: center;
+}
+
+.go-back-project-full:hover {
+    background-color: rgb(248, 209, 50);
+    color: black;
 }
 
 /*admin*/
@@ -232,7 +250,6 @@ a {
 }
 
 .card-text {
-    height: 200px;
     overflow: auto;
 }
 

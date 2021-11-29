@@ -7,11 +7,11 @@
         {% for project in projects %}
             <div class="card" style="width: 18rem; margin: 1rem;">
                 <img class="card-img-top" style="padding: .5rem;object-fit: cover; width: 200px; height: 150px"
-                     src="{{ asset(project.imageSrc)}}"
+                     src="{{ asset("assets/") ~ project.imageSrc  }}"
                      alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ project.title }}</h5>
-                    <p class="card-text">{{ project.content }}</p>
+                    <p class="card-text">{{ project.content|raw }}</p>
                     <a href="{{ path('project_list', {id: project.id}) }}" style="background-color: #FFDE59;"
                        class="btn">Go somewhere</a>
                 </div>
