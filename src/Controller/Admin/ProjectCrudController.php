@@ -25,7 +25,8 @@ class ProjectCrudController extends AbstractCrudController
             TextField::new('category'),
             TextEditorField::new('content'),
             ImageField::new('imageSrc')->setUploadDir("public/assets")
+                ->setRequired(false)
+                ->setBasePath('assets')
         ];
     }
-
 }
